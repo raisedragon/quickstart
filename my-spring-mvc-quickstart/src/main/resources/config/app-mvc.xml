@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"     
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"     
+        xmlns:context="http://www.springframework.org/schema/context"     
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd   
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd   
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 启用spring mvc 注解 -->
+	<context:annotation-config />
+	
+	
+	<context:property-placeholder location="classpath:application.properties" />
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+		<property name="useSuffixPatternMatch" value="false"></property>
+		<property name="useTrailingSlashMatch" value="false"></property>
+	</bean>
+	
+	<bean name="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="/WEB-INF/i18n/messages"></property>
+		<property name="cacheSeconds" value="5"></property>
+	</bean>
+
+	<bean id="thymeleafTemplateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="suffix" value=".html"></property>
+		<property name="templateMode" value="HTML5"></property>
+		<property name="cacheable" value="false"></property>
+	</bean>
+	
+	<bean id="thymeleafDialect" class="org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect.SpringSecurityDialect"></bean>
+	
+	<bean id="thymeleafTemplateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+		<property name="templateResolver" ref="thymeleafTemplateResolver"></property>
+		<property name="dialect" ref="thymeleafDialect">
+		</property>
+	</bean>
+	
+	
+	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+		<property name="TemplateEngine" ref="thymeleafTemplateEngine"></property>
+		<property name="characterEncoding" value="UTF-8"></property>
+	</bean>
+
+	<bean class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="validationMessageSource" ref="messageSource"></property>
+	</bean>	
+	
+
+	<!-- 设置使用注解的类所在的jar包 -->
+	<context:component-scan base-package="com.raise.orgs.controller"></context:component-scan>
+
+	<!-- 完成请求和注解POJO的映射 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+
+	<!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/views/" p:suffix=".jsp" />
+	
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>
+ 
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles/layouts-base.xml</value>
+            </list>
+        </property>
+    </bean>
+</beans>
+
+
+
