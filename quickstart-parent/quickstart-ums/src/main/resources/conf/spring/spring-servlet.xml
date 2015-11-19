@@ -29,8 +29,8 @@
 	<!-- Standard Spring MessageSource implementation                     -->
 	<!-- **************************************************************** -->
 	<bean id="messageSource"
-		class="org.springframework.context.support.ResourceBundleMessageSource">
-		<property name="basename" value="messages" />
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="/WEB-INF/i18n/messages" />
 	</bean>
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 	    <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/> 
