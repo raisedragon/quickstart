@@ -5,3 +5,6 @@
 **/WEB-INF/lib/*
 **/.svn
 **/.svn/*
+**/.settings
+**/.project
+**/.classpath
