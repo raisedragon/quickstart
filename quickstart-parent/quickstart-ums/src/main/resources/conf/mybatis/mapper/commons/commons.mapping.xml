@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Commons">
+	
+	<sql id="querySql">
+		<where>
+			IS_DELETED='0'
+			<if test="criterias.size()==1">
+				<trim prefix="AND" >
+					<include refid="Commons.criteriasSql"/>
+				</trim>
+			
+			</if>
+			<if test="criterias.size()>1">
+				<trim prefix="AND (" suffix=")" >
+					<include refid="Commons.criteriasSql"/>
+				</trim>
+			</if>
+		</where>
+	</sql>
+		
+		
+	<sql id="criteriasSql">
+		<foreach  collection="criterias" item="criteria" separator="or">
+			<if test="!criteria.criterions.empty">
+				<if test="criteria.criterions.size()==1">
+					<trim prefixOverrides="and">
+						<include refid="Commons.criterionSql"/>
+					</trim>
+				</if>
+				<if test="criteria.criterions.size()>1">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<include refid="Commons.criterionSql"/>
+					</trim>
+				</if>
+			</if>
+		</foreach>
+	</sql>
+	
+	<sql id="criterionSql">
+		<foreach collection="criteria.criterions" item="criterion">
+			<choose>
+				<when test="criterion.criteriaOperator.name()=='Equal'">
+					and RES.${criterion.propertyName} = #{criterion.value}
+				</when>
+				<when test="criterion.criteriaOperator.name()=='LessThanOrEqual'">
+					and RES.${criterion.propertyName} &lt;= #{criterion.value}
+				</when>
+				<when test="criterion.criteriaOperator.name()=='GreaterThanOrEqual'">
+					and RES.${criterion.propertyName} >= #{criterion.value}
+				</when>
+				<when test="criterion.criteriaOperator.name()=='NotEqual'">
+					and RES.${criterion.propertyName} != #{criterion.value}
+				</when>
+				<when test="criterion.criteriaOperator.name()=='IsNull'">
+					and RES.${criterion.propertyName} is null
+				</when>
+				<when test="criterion.criteriaOperator.name()=='IsNotNull'">
+					and RES.${criterion.propertyName} is not null
+				</when>
+				<when test="criterion.criteriaOperator.name()=='Like'">
+					<bind name="pattern" value="'%' + criterion.value + '%'" />
+					and RES.${criterion.propertyName} like #{pattern}
+				</when>
+				<when test="criterion.criteriaOperator.name()=='FirstLike'">
+					<bind name="pattern" value="'%' + criterion.value" />
+					and RES.${criterion.propertyName} like #{pattern}
+				</when>
+				<when test="criterion.criteriaOperator.name()=='LastLike'">
+					<bind name="pattern" value="criterion.value + '%'" />
+					and RES.${criterion.propertyName} like #{pattern}
+				</when>
+				<when test="criterion.criteriaOperator.name()=='NotLike'">
+					<bind name="pattern" value="'%' + criterion.value + '%'" />
+					and RES.${criterion.propertyName} not like #{pattern}
+				</when>
+				<when test="criterion.criteriaOperator.name()=='NotFirstLike'">
+					<bind name="pattern" value="'%' + criterion.value" />
+					and RES.${criterion.propertyName} not like #{pattern}
+				</when>
+				<when test="criterion.criteriaOperator.name()=='NotLastLike'">
+					<bind name="pattern" value="criterion.value + '%'" />
+					and RES.${criterion.propertyName} not like #{pattern}
+				</when>
+				<when test="criterion.criteriaOperator.name()=='In'">
+					and RES.${criterion.propertyName} IN 
+					<foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+						#{listItem}
+					</foreach>
+				</when>
+				<when test="criterion.criteriaOperator.name()=='NotIn'">
+					and RES.${criterion.propertyName} NOT IN 
+					<foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+						#{listItem}
+					</foreach>
+				</when>
+				<when test="criterion.criteriaOperator.name()=='Between'">
+					and RES.${criterion.propertyName} NOT BETWEEN  #{criterion.value[0]} AND #{criterion.value[1]} 
+				</when>
+				<when test="criterion.criteriaOperator.name()=='NotBetween'">
+					and RES.${criterion.propertyName} BETWEEN  #{criterion.value[0]} AND #{criterion.value[1]} 
+				</when>
+			</choose>
+		</foreach>
+	</sql>
+		
+	<sql id="updateDataCaluseSql">
+		<set>   
+			<foreach collection="updateClause.dataClauses" item="clause" separator=",">
+				${clause.property} #{clause.value}
+			</foreach>
+		</set>
+	</sql>
+	
+	
+	<sql id="orderByClauseSql">
+		ORDER BY 
+			${orderBy}
+	</sql>
+	
+</mapper>
