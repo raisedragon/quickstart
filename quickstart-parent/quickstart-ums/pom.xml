@@ -11,9 +11,9 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java-version>1.8</java-version>
+<!-- 		<java-version>1.8</java-version> -->
 		<!-- Override Spring version -->
-		<spring.version>4.2.1.RELEASE</spring.version>
+<!-- 		<spring.version>4.2.1.RELEASE</spring.version> -->
 		<!-- AssertJ is not a part of Spring IO platform, so the version must be provided explicitly -->
 		<assertj-core-version>3.1.0</assertj-core-version>
 	</properties>
@@ -54,7 +54,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity3</artifactId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
 		</dependency>
 		<!-- Persistence -->
 		<dependency>
@@ -197,26 +197,48 @@
 	</dependencies>
 	
 	<build>
-		<finalName>${project.artifactId}</finalName>
-		<directory>src/main/webapp/WEB-INF/</directory>
-		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<path>/</path>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java-version}</source>
+					<target>${java-version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warName>project-1-users-1.0</warName>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>copy-dependencies</id>
-						<phase>compile</phase>
+						<id>deploy</id>
+						<phase>deploy</phase>
 						<goals>
-							<goal>copy-dependencies</goal>
+							<goal>sources</goal>
 						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}/lib</outputDirectory>
-							<includeScope>runtime</includeScope>
-						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
