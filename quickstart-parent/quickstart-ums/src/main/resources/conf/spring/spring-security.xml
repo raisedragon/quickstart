@@ -38,6 +38,8 @@
 			logout-url="/logout" 
 			logout-success-url="/signin?logout" 
 		/>
+		
+		<security:remember-me remember-me-parameter="remember_me" />
 	</security:http>
 	
 
