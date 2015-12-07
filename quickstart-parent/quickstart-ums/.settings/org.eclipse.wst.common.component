@@ -6,6 +6,9 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+        <dependent-module archiveName="quickstart-spi-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/quickstart-spi/quickstart-spi">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="quickstart-core-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/quickstart-core/quickstart-core">
             <dependency-type>uses</dependency-type>
         </dependent-module>

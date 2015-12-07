@@ -1,14 +1,21 @@
 package com.raise.core.query;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Query {
+import com.raise.core.mybatis.Page;
+
+public class Query implements Serializable{
 
     /**
      * 条件集列表
      */
     private List<Criteria> criterias = new ArrayList<Criteria>();
+    /**
+     * 分页
+     */
+    private Page page;
 
     protected Criteria getFirstCriteria() {
         if (criterias.isEmpty()) {
@@ -45,5 +52,15 @@ public class Query {
     public List<Criteria> getCriterias() {
         return criterias;
     }
+
+	public Page getPage() {
+		return page;
+	}
+
+	public void setPage(Page page) {
+		this.page = page;
+	}
+    
+    
 
 }

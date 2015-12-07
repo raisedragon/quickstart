@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://code.alibabatech.com/schema/dubbo
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+		
+    <!--  service缺省配置参数   executes:并发数；
+          timeout:超时；validation:是否验证；cluster:集群模式；
+          retries:失败调用重试次数；loadbalance：负载平衡模式-->
+    <dubbo:provider id="dubboProviderConfig_bizLog"
+        			executes="${dubbo.executes}" 
+        			timeout="${dubbo.timeout}" 
+        			validation="${dubbo.validation}"
+        			cluster="${dubbo.cluster}" 
+        			retries="${dubbo.retries}" 
+        			loadbalance="${dubbo.loadbalance}"/>
+    
+    <dubbo:service interface="com.raise.ums.service.UserService" ref="userService" version="1.0.0" />
+    
+</beans>

@@ -1,4 +1,4 @@
-package com.raise.ums.controller;
+package com.raise.web.ums.controller;
 
 import java.security.Principal;
 

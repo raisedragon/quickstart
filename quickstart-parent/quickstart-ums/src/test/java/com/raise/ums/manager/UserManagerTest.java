@@ -1,5 +1,7 @@
 package com.raise.ums.manager;
 
+import java.util.Base64;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

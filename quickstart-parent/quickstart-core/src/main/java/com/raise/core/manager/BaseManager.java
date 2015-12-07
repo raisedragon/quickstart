@@ -90,19 +90,10 @@ public abstract class BaseManager<E extends BaseEntity, D extends BaseDao<E>> {
 	 * @return
 	 */
 	public List<E> list(Query query) {
+		if(null!=query.getPage()){
+			PaginationInterceptor.startPage(query.getPage());
+		}
 		return getDao().getByCriteria(query);
-	}
-
-	/**
-	 * 根据查询与分页对象进行分页查询
-	 * @param query 查询参数对象
-	 * @param page 分页对象
-	 * @return
-	 */
-	public List<E> list(Query query,Page page){
-		PaginationInterceptor.startPage(page);
-		List<E> list = this.list(query); 
-		return list;
 	}
 	
 	/**

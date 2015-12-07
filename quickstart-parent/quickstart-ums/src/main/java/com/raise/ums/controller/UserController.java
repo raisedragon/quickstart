@@ -23,7 +23,7 @@ import com.raise.ums.query.UserQuery;
 
 
 
-@Controller
+//@Controller
 @RequestMapping("/user")
 public class UserController {
 	@Autowired
@@ -48,7 +48,9 @@ public class UserController {
 	public ReturnedData list(HttpServletRequest request){
 		SentParameters parameters = new SentParameters(request);
 		Page page = new Page(parameters.getStart(), parameters.getLength());
-		List<UserEntity> list = userManager.list(new UserQuery(), page);
+		UserQuery query = new UserQuery();
+		query.setPage(page);;
+		List<UserEntity> list = userManager.list(query);
 		ReturnedData data = new ReturnedData(list,page,0l);
 		data.setRecordsFiltered(data.getRecordsTotal());
 		return data;

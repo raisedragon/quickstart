@@ -1,4 +1,4 @@
-package com.raise.ums.controller;
+package com.raise.web.ums.controller;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;

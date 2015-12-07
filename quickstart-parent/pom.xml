@@ -15,23 +15,36 @@
 	<modules>
 		<module>quickstart-core</module>
 		<module>quickstart-ums</module>
+		<module>quickstart-web</module>
+		<module>quickstart-spi</module>
 	</modules>
-	
-	
+
+
 	<properties>
 		<project.version>0.0.1-SNAPSHOT</project.version>
 		<mybatis.version>3.2.5</mybatis.version>
 		<mybatis-spring.version>1.2.2</mybatis-spring.version>
 	</properties>
-	
+
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>com.raise</groupId>
+				<artifactId>quickstart-spi</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.raise</groupId>
 				<artifactId>quickstart-core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			
+
+			<dependency>
+				<groupId>com.raise</groupId>
+				<artifactId>quickstart-ums</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>org.mybatis</groupId>
 				<artifactId>mybatis</artifactId>
@@ -42,22 +55,32 @@
 				<artifactId>mybatis-spring</artifactId>
 				<version>${mybatis-spring.version}</version>
 			</dependency>
-			
+
 			<dependency>
-			    <groupId>org.mybatis.caches</groupId>
-			    <artifactId>mybatis-redis</artifactId>
-			    <version>1.0.0-beta1</version>
-			 </dependency>
-			 
-			 <dependency>
-		    <groupId>org.mybatis.caches</groupId>
-		    <artifactId>mybatis-ehcache</artifactId>
-		    <version>1.0.3</version>
-		</dependency>
-				
+				<groupId>org.mybatis.caches</groupId>
+				<artifactId>mybatis-redis</artifactId>
+				<version>1.0.0-beta1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mybatis.caches</groupId>
+				<artifactId>mybatis-ehcache</artifactId>
+				<version>1.0.3</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>dubbo</artifactId>
+				<version>2.5.3</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.101tec</groupId>
+			    <artifactId>zkclient</artifactId>
+			    <version>0.7</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<build>
 		<pluginManagement>
 			<plugins>
