@@ -6,7 +6,7 @@ var App = function() {
 		var oTable = $('#dataList').dataTable({
 			serverSide: true,
 		    ajax: {
-		        url: __ctx+'/user/list',
+		        url: __ctx+'/user/getDatas',
 		        type: 'POST'
 		    },
 			"columns": [{

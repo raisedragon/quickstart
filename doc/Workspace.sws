@@ -4,7 +4,9 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model Expanded="Yes" ID="{ABD0B750-C610-4BD0-B265-1C92592652C1}" Name="architecture" Selected="Yes" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="architecture.oom"/>
+		<Model Expanded="Yes" ID="{ABD0B750-C610-4BD0-B265-1C92592652C1}" Loaded="No" Name="architecture" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="architecture.oom"/>
+		<Model Expanded="Yes" ID="{98086B01-C9E1-11D4-9552-0090277716A9}" Name="Object-Oriented Model 1" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="../quickstart-parent/document/新建 PowerDesigner 15 Object-Oriented Model File.OOM"/>
+		<Model Expanded="Yes" ID="{12B93357-788C-4D65-9575-20A94A14F73A}" Name="UMS" Selected="Yes" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="../quickstart-parent/document/UMS.oom"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>

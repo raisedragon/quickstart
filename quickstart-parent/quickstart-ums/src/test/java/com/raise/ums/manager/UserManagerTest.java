@@ -1,19 +1,13 @@
 package com.raise.ums.manager;
 
-import java.util.Base64;
-
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Repeat;
 
 import com.raise.ums.entity.UserEntity;
-import com.raise.ums.test.BaseTest;
+import com.raise.ums.test.UMSBaseTest;
 
 
-public class UserManagerTest extends BaseTest{
+public class UserManagerTest extends UMSBaseTest{
 	
 	@Autowired
 	protected UserManager userManager;

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.raise.spi.StringCommand;
+import com.raise.ums.cmd.SaveUserCommand;
 import com.raise.ums.cmd.QueryUserCommand;
 import com.raise.ums.entity.UserEntity;
 import com.raise.ums.manager.UserManager;
@@ -22,6 +23,22 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserEntity findByEmail(StringCommand cmd) {
 		return userManager.findByEmail(cmd.getKey());
+	}
+
+	@Override
+	public void save(SaveUserCommand cmd) {
+		UserEntity userEntity = cmd.getUser();
+		if(userEntity.getId()==null){
+			userManager.add(userEntity);
+		}else{
+			userManager.update(userEntity);
+		}
+	}
+	
+
+	@Override
+	public UserEntity findByName(StringCommand cmd) {
+		return userManager.findByName(cmd.getKey());
 	}
 
 }

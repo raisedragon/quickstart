@@ -31,4 +31,11 @@ public class UserManager extends GenericeManager<UserEntity, UserDao>{
 		return this.single(query);
 	}
 
+
+	public UserEntity findByName(String name) {
+		UserQuery query = new UserQuery();
+		query.withNameEqual(name);
+		return this.single(query);
+	}
+
 }

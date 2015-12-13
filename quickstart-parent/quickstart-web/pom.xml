@@ -144,7 +144,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
-					<warName>project-1-users-1.0</warName>
+					<warName>${project.artifactId}</warName>
 				</configuration>
 			</plugin>
 			<plugin>

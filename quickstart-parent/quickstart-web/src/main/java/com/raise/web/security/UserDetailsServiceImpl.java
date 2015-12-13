@@ -46,5 +46,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		//TODO
 		return new SimpleGrantedAuthority("USER");
 	}
+	
+	
 
 }

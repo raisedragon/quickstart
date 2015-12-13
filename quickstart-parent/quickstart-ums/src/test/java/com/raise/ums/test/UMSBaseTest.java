@@ -19,7 +19,7 @@ import com.raise.core.identity.IdGenerator;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
 @Transactional
-public class BaseTest {
+public class UMSBaseTest {
 
     protected Logger         logger = LoggerFactory.getLogger(this.getClass());
     

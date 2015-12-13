@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.raise.core.mybatis.Page;
 import com.raise.spi.StringCommand;
+import com.raise.ums.cmd.SaveUserCommand;
 import com.raise.ums.cmd.QueryUserCommand;
 import com.raise.ums.entity.UserEntity;
 import com.raise.ums.query.UserQuery;
@@ -29,6 +30,13 @@ public class UserXService {
 		QueryUserCommand cmd = new QueryUserCommand();
 		cmd.setUserQuery(query);
 		return userService.queryUser(cmd);
+	}
+
+
+	public void add(UserEntity user) {
+		SaveUserCommand cmd = new SaveUserCommand();
+		cmd.setUser(user);
+		userService.save(cmd);
 	}
 	
 }
