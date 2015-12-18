@@ -17,6 +17,7 @@
 		<module>quickstart-ums</module>
 		<module>quickstart-web</module>
 		<module>quickstart-spi</module>
+		<module>quickstart-portal</module>
 	</modules>
 
 

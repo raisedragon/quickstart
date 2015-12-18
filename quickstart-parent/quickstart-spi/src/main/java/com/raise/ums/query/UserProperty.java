@@ -4,8 +4,8 @@ import com.raise.core.query.BaseProperty;
 
 public abstract class UserProperty extends BaseProperty {
 
-    public static final String name     = "NAME";
-    public static final String account  = "ACCOUNT";
-    public static final String password = "PASSWORD";
-    public static final String email    = "EMAIL";
+    public static final String name     = "name";
+    public static final String account  = "account";
+    public static final String password = "password";
+    public static final String email    = "email";
 }

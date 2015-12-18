@@ -5,6 +5,8 @@ var App = function() {
 	var initTable = function() {
 		var oTable = $('#dataList').dataTable({
 			serverSide: true,
+			"searching": true,
+			 "bFilter": false, //列筛序功能
 		    ajax: {
 		        url: __ctx+'/user/list',
 		        type: 'POST'

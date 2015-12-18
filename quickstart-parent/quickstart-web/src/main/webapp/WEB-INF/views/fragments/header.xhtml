@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
 </head>
@@ -21,6 +21,11 @@
                 <li th:classappend="${#httpServletRequest.getRequestURI() == '/contact' ? 'active':''}"><a href="#contact" >Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+            	<li th:if="${#authorization.expression('!isAuthenticated()')}">
+                    <a href="/signin" th:href="@{/user/signup}">
+                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign up
+                    </a>
+                </li>
                 <li th:if="${#authorization.expression('!isAuthenticated()')}">
                     <a href="/signin" th:href="@{/signin}">
                         <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in
@@ -31,6 +36,11 @@
                         <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
                     </a>
                     <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
+                </li>
+                 <li th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a href="#" th:href="@{/user/detail}" >
+                    	<span sec:authentication="name">user name</span>
+                    </a>
                 </li>
             </ul>
         </div>

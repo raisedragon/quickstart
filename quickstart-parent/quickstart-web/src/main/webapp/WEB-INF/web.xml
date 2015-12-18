@@ -52,4 +52,9 @@
 	<error-page>
     	<location>/generalError</location>
 	</error-page>
+	
+	<listener>
+    	<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+    </listener>
+	
 </web-app>

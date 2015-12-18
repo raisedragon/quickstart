@@ -48,6 +48,6 @@
 		<security:authentication-provider user-service-ref="userDetailsService" />		
 	</security:authentication-manager>
 	
-	<bean id="userDetailsService" class="com.raise.web.security.UserDetailsServiceImpl"></bean>
+	<bean id="userDetailsService" class="com.raise.ums.security.UserDetailsServiceImpl"></bean>
 
 </beans>
