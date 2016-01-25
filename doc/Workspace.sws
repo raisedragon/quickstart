@@ -5,8 +5,9 @@
 <Workspace>
 	<Local Expanded="Yes">
 		<Model Expanded="Yes" ID="{ABD0B750-C610-4BD0-B265-1C92592652C1}" Loaded="No" Name="architecture" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="architecture.oom"/>
-		<Model Expanded="Yes" ID="{98086B01-C9E1-11D4-9552-0090277716A9}" Name="Object-Oriented Model 1" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="../quickstart-parent/document/新建 PowerDesigner 15 Object-Oriented Model File.OOM"/>
-		<Model Expanded="Yes" ID="{12B93357-788C-4D65-9575-20A94A14F73A}" Name="UMS" Selected="Yes" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="../quickstart-parent/document/UMS.oom"/>
+		<Model Expanded="Yes" ID="{98086B01-C9E1-11D4-9552-0090277716A9}" Loaded="No" Name="Object-Oriented Model 1" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="../quickstart-parent/document/新建 PowerDesigner 15 Object-Oriented Model File.OOM"/>
+		<Model Expanded="Yes" ID="{12B93357-788C-4D65-9575-20A94A14F73A}" Loaded="No" Name="UMS" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="../quickstart-parent/document/UMS.oom"/>
+		<Model Expanded="Yes" ID="{195D1D1B-A004-4B91-A796-6EADF930A282}" Name="SmartJiemai" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="file:///I|/workbench/globex/doc/数据库/sinob2b/GLOBEX.pdm"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>
