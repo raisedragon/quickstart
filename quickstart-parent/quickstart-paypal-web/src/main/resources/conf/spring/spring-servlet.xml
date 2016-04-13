@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   http://www.springframework.org/schema/beans/spring-beans-4.2.xsd   
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-4.2.xsd   
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-4.2.xsd   
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd
+       http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+	<!-- **************************************************************** -->
+	<!--  SPRING ANNOTATION PROCESSING                                    -->
+	<!-- **************************************************************** -->
+	<mvc:annotation-driven  validator="validator"  />
+	<context:component-scan base-package="com.raise">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+	
+
+	<!-- **************************************************************** -->
+	<!--  RESOURCE FOLDERS CONFIGURATION                                  -->
+	<!--  Dispatcher configuration for serving static resources           -->
+	<!-- **************************************************************** -->
+	<mvc:resources location="/resources/" mapping="/resources/**" />
+    
+
+	<!-- **************************************************************** -->
+	<!-- MESSAGE EXTERNALIZATION/INTERNATIONALIZATION 					  -->
+	<!-- Standard Spring MessageSource implementation                     -->
+	<!-- **************************************************************** -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="/WEB-INF/i18n/messages" />
+	</bean>
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="validationMessageSource" ref="messageSource"></property>
+	</bean>
+	
+	
+	
+	<!-- **************************************************************** -->
+	<!-- CONVERSION SERVICE 											  -->
+	<!-- Standard Spring formatting-enabled implementation                -->
+	<!-- **************************************************************** -->
+	<!-- 
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="formatters">
+			<set>
+				<bean class="thymeleafexamples.stsm.web.conversion.VarietyFormatter" />
+				<bean class="thymeleafexamples.stsm.web.conversion.DateFormatter" />
+			</set>
+		</property>
+	</bean>
+ 	-->
+	
+	<!-- **************************************************************** -->
+	<!-- THYMELEAF-SPECIFIC ARTIFACTS 									  -->
+	<!-- TemplateResolver <- TemplateEngine <- ViewResolver               -->
+	<!-- **************************************************************** -->
+
+	<bean id="templateResolver"
+		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".html" />
+		<property name="templateMode" value="HTML5" />
+		<property name="cacheable" value="false" />  
+		<property name="characterEncoding" value="UTF-8"/>  
+	</bean>
+	
+	
+	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+		<property name="additionalDialects">
+        <set>
+          <bean class="org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect"/>
+        </set>
+      </property>
+	</bean>
+	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="templateEngine" />
+		 <property name="characterEncoding" value="UTF-8"/>
+	</bean>
+	
+</beans>
+
+
+

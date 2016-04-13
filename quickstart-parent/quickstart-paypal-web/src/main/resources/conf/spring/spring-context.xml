@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"     
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:p="http://www.springframework.org/schema/p"     
+       xmlns:context="http://www.springframework.org/schema/context"     
+       xmlns:util="http://www.springframework.org/schema/util"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+   		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd   
+       	http://www.springframework.org/schema/aop 
+       	http://www.springframework.org/schema/aop/spring-aop-4.2.xsd   
+       	http://www.springframework.org/schema/tx 
+       	http://www.springframework.org/schema/tx/spring-tx-4.2.xsd   
+       	http://www.springframework.org/schema/util
+       	http://www.springframework.org/schema/util/spring-util.xsd
+       	http://www.springframework.org/schema/context 
+       	http://www.springframework.org/schema/context/spring-context-4.2.xsd"
+       default-lazy-init="true"
+       >
+   
+    <!-- 开启注解配置 -->  
+    <context:annotation-config />  
+    <!-- 扫描service层 -->  
+    <context:component-scan base-package="com.raise">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+    
+    <bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:conf/app.properties</value>
+            </list>
+        </property>
+    </bean>
+    <context:property-placeholder location="" properties-ref="properties"/>
+    
+    <!-- 设置系统属性 -->
+    <bean class="com.raise.core.support.SystemPropertiesInitializer" lazy-init="false">
+    	<property name="properties" ref="properties"/>
+    </bean>
+    
+    
+    <import resource="spring-beans.xml"/>
+<!--     <import resource="spring-security.xml"/> -->
+<!--     <import resource="spring-dubbo.xml"/> -->
+</beans>

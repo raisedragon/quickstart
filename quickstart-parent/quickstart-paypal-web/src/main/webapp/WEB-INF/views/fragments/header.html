@@ -1,0 +1,149 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"> <!--<![endif]-->
+
+<head>
+	 <meta charset="utf-8"/>
+     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+     <title>XX公司</title>
+     <meta name="description" content=""/>
+     <meta name="viewport" content="width=device-width"/>
+
+     <!-- Main Style Sheet -->
+     <link rel="stylesheet" href="../../../resources/css/main.css" th:href="@{/resources/css/main.css}"/>
+
+	 <script src="../../../resources/js/vendor/jquery-1.10.2.min.js"></script>
+     <!-- Modernizr -->
+     <script src="../../../resources/js/vendor/modernizr-2.6.2.min.js" th:href="@{/resources/js/vendor/modernizr-2.6.2.min.js}"></script>
+     <!-- Respond.js for IE 8 or less only -->
+     <!--[if (lt IE 9) & (!IEMobile)]>
+         <script src="../../../resources/js/vendor/respond.min.js" th:href="@{/resources/js/vendor/respond.min.js}"></script>
+     <![endif]-->
+     
+     <script src="../../../resources/js/vendor/bootstrap.min.js"></script>
+     <script src="../../../resources/js/vendor/holder.js"></script>
+     <script src="../../../resources/js/main.js"></script>
+     
+</head>
+<body>
+	<!--[if lte IE 7]>
+	    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+	<![endif]-->
+	<header role="banner">
+		<div class="container">
+		  <a class="banner-brand visible-md visible-lg" href="header.html"><img data-src="holder.js/180x52" alt="Bootstrappin'" width="180"/></a>
+		  <div class="utility-nav">
+		    <ul>
+		      <li><a href="#" title="注册/登录"><i class="icon fa fa-user fa-lg"></i> <span>注册/登录</span></a></li>
+		    </ul>
+		  </div><!-- /.utility-nav -->
+		</div><!-- /.container -->
+		  <nav role="navigation" class="navbar navbar-default">
+		    <div class="container">
+		      <div class="navbar-header">
+		        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		          <span class="icon-bar"></span>
+		          <span class="icon-bar"></span>
+		          <span class="icon-bar"></span>
+		        </button>
+		        <a class="navbar-brand visible-xs visible-sm" href="index.html"><img  data-src="holder.js/180x52" alt="Bootstrappin'" width="120"/></a>
+		      </div>
+		      <div class="navbar-collapse collapse">
+		        <ul class="nav navbar-nav">
+		          <li class="dropdown">
+		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Shoes <b class="caret"></b></a>
+		              <ul class="dropdown-menu">
+		                <li><a href="#">Action</a></li>
+		                <li><a href="#">Another action</a></li>
+		                <li><a href="#">Something else here</a></li>
+		                <li class="divider"></li>
+		                <li><a href="#">Separated link</a></li>
+		                <li class="divider"></li>
+		                <li><a href="#">One more separated link</a></li>
+		              </ul>
+		          </li>
+		          <li class="dropdown">
+		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Clothing <b class="caret"></b></a>
+		              <ul class="dropdown-menu">
+		                <li><a href="#">Action</a></li>
+		                <li><a href="#">Another action</a></li>
+		                <li><a href="#">Something else here</a></li>
+		                <li class="divider"></li>
+		                <li><a href="#">Separated link</a></li>
+		                <li class="divider"></li>
+		                <li><a href="#">One more separated link</a></li>
+		              </ul>
+		          </li>
+		          <li class="dropdown">
+		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Accessories <b class="caret"></b></a>
+		              <ul class="dropdown-menu">
+		                <li><a href="#">Action</a></li>
+		                <li><a href="#">Another action</a></li>
+		                <li><a href="#">Something else here</a></li>
+		                <li class="divider"></li>
+		                <li><a href="#">Separated link</a></li>
+		                <li class="divider"></li>
+		                <li><a href="#">One more separated link</a></li>
+		              </ul>
+		          </li>
+		          <li class="dropdown">
+		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men <b class="caret"></b></a>
+		              <ul class="dropdown-menu">
+		                <li><a href="#">Action</a></li>
+		                <li><a href="#">Another action</a></li>
+		                <li><a href="#">Something else here</a></li>
+		                <li class="divider"></li>
+		                <li><a href="#">Separated link</a></li>
+		                <li class="divider"></li>
+		                <li><a href="#">One more separated link</a></li>
+		              </ul>
+		          </li>
+		          <li class="dropdown">
+		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Women <b class="caret"></b></a>
+		              <ul class="dropdown-menu">
+		                <li><a href="#">Action</a></li>
+		                <li><a href="#">Another action</a></li>
+		                <li><a href="#">Something else here</a></li>
+		                <li class="divider"></li>
+		                <li><a href="#">Separated link</a></li>
+		                <li class="divider"></li>
+		                <li><a href="#">One more separated link</a></li>
+		              </ul>
+		          </li>
+		          <li class="dropdown">
+		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kids <b class="caret"></b></a>
+		              <ul class="dropdown-menu">
+		                <li><a href="#">Action</a></li>
+		                <li><a href="#">Another action</a></li>
+		                <li><a href="#">Something else here</a></li>
+		                <li class="divider"></li>
+		                <li><a href="#">Separated link</a></li>
+		                <li class="divider"></li>
+		                <li><a href="#">One more separated link</a></li>
+		              </ul>
+		          </li>
+		        </ul>
+		        <ul class="nav navbar-nav navbar-right">
+		          <li class="dropdown">
+		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">All Departments <b class="caret"></b></a>
+		              <ul class="dropdown-menu">
+		                <li><a href="#">Action</a></li>
+		                <li><a href="#">Another action</a></li>
+		                <li><a href="#">Something else here</a></li>
+		                <li class="divider"></li>
+		                <li><a href="#">Separated link</a></li>
+		                <li class="divider"></li>
+		                <li><a href="#">One more separated link</a></li>
+		              </ul>
+		          </li>
+		        </ul>
+		      </div><!--/.nav-collapse -->
+		    </div><!--/.container -->
+		    </nav>
+		</header>
+		
+</body>
+</html>
