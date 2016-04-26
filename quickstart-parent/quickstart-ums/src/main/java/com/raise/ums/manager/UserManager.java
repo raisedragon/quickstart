@@ -1,14 +1,16 @@
 package com.raise.ums.manager;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.raise.core.exception.FieldValidateException;
-import com.raise.core.exception.ValidateException;
+import com.raise.core.mybatis.Page;
 import com.raise.ums.dao.UserDao;
 import com.raise.ums.entity.UserEntity;
-import com.raise.ums.query.UserProperty;
-import com.raise.ums.query.UserQuery;
+import com.raise.ums.manager.query.UserProperty;
+import com.raise.ums.manager.query.UserQuery;
 
 
 @Component

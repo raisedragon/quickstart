@@ -1,4 +1,4 @@
 git add -A 
-git commit -m "not comment"
+git commit -m "no comment"
 git push
 pause

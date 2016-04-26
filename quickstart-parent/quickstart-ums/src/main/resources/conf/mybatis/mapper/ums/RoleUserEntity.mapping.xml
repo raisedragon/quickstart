@@ -1,66 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.raise.ums.dao.UserDao">
+<mapper namespace="com.raise.ums.dao.RoleUserDao">
 	<cache type="com.raise.core.mybatis.cache.FacadeCache" />
-	<resultMap id="UserResultMap" type="com.raise.ums.entity.UserEntity" extends="Commons.resultMapSql">
-		<result property="name" column="NAME" jdbcType="VARCHAR"/>
-		<result property="account" column="ACCOUNT" jdbcType="VARCHAR"/>
-		<result property="password" column="PASSWORD" jdbcType="VARCHAR"/>
-		<result property="email" column="EMAIL" jdbcType="VARCHAR"/>
+	<resultMap id="ROLE_USERResultMap" type="com.raise.ums.entity.RoleUserEntity" extends="Commons.resultMapSql">
+		<result property="roleId" column="ROLE_USER_ID" jdbcType="VARCHAR"/>
+		<result property="userId" column="USER_ID" jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<sql id="columns">
 			<include refid="Commons.columnsSql"/>,
-			NAME,
-			ACCOUNT,
-			PASSWORD,
-			EMAIL
+			ROLE_USER_ID,
+			USER_ID
 	</sql>
 	
-	<insert id="add" parameterType="com.raise.ums.entity.UserEntity">
-		INSERT INTO user
+	<insert id="add" parameterType="com.raise.ums.entity.RoleUserEntity">
+		INSERT INTO ROLE_USER
 		(
 			<include refid="columns"></include>
 		)
 		VALUES 
 		(
 			<include refid="Commons.addValuesSql"/>,
-			#{name,jdbcType=VARCHAR}, 
-			#{account,jdbcType=VARCHAR}, 
-			#{password,jdbcType=VARCHAR},
-			#{email,jdbcType=VARCHAR}
+			#{roleId,jdbcType=VARCHAR}, 
+			#{userId,jdbcType=VARCHAR}
 			
 		)
 	</insert>
 	
-	<select id="get"   parameterType="String" resultMap="UserResultMap">
+	<select id="get"   parameterType="String" resultMap="ROLE_USERResultMap">
 		SELECT 
 			<include refid="columns" /> 
 		FROM 
-			USER 
+			ROLE_USER 
 		WHERE 
 			IS_DELETED='0'
 			AND ID=#{id}
 	</select>
 	
 	
-	<update id="update" parameterType="com.raise.ums.entity.UserEntity">
-		UPDATE USER SET
+	<update id="update" parameterType="com.raise.ums.entity.RoleUserEntity">
+		UPDATE ROLE_USER SET
 			<include refid="Commons.updateSetsSql"/>,
-			ACCOUNT=#{account,jdbcType=VARCHAR},
-			PASSWORD=#{password,jdbcType=VARCHAR},
-			NAME_#{name,jdbcType=VARCHAR},
-			EMAIL=#{email,jdbcType=VARCHAR}
+			ROLE_USER_ID=#{roleId,jdbcType=VARCHAR}, 
+			USER_ID=#{userId,jdbcType=VARCHAR}
 		WHERE
 			ID=#{id}
 	</update>
 	
 	<update id="delete"  parameterType="String">
 		<include refid="Commons.params"/>
-		UPDATE USER SET
+		UPDATE ROLE_USER SET
 			IS_DELETED='1',
 			UPDATED=#{currentTime,jdbcType=TIMESTAMP},
-			UPDATED_BY=#{currentUserId,jdbcType=VARCHAR}
+			UPDATED_BY=#{currentROLE_USERId,jdbcType=VARCHAR}
 		WHERE
 			ID_=#{id}
 	</update>
@@ -68,35 +60,35 @@
 	<update id="disable"  parameterType="String">
 		<include refid="Commons.params"/>
 		UPDATE 
-			USER 
+			ROLE_USER 
 		SET
 			IS_ACTIVE_='0',
 			UPDATED=#{currentTime,jdbcType=TIMESTAMP},
-			UPDATED_BY=#{currentUserId,jdbcType=VARCHAR}
+			UPDATED_BY=#{currentROLE_USERId,jdbcType=VARCHAR}
 		WHERE
 			ID_=#{id}
 	</update>
 	<update id="enable"  parameterType="String">
 		<include refid="Commons.params"/>
 		UPDATE 
-			USER 
+			ROLE_USER 
 		SET
 			IS_ACTIVE='1',
 			UPDATED=#{currentTime,jdbcType=TIMESTAMP},
-			UPDATED_BY=#{currentUserId,jdbcType=VARCHAR}
+			UPDATED_BY=#{currentROLE_USERId,jdbcType=VARCHAR}
 		WHERE
 			ID_=#{id}
 	</update>
 	
 	<!-- Operate by criteria -->
 	
-	<select id="getByCriteria" parameterType="com.raise.ums.manager.query.UserQuery" resultMap="UserResultMap">
+	<select id="getByCriteria" parameterType="com.raise.ums.manager.query.RoleUserQuery" resultMap="ROLE_USERResultMap">
 		SELECT 
 			<include refid="columns"></include>
 		<include refid="getByCriteriaSql" />
 	</select>
 	
-	<select id="countByCriteria" parameterType="com.raise.ums.manager.query.UserQuery" resultType="Long">
+	<select id="countByCriteria" parameterType="com.raise.ums.manager.query.RoleUserQuery" resultType="Long">
 		SELECT 
 			count(1)
 		<include refid="getByCriteriaSql" />
@@ -104,7 +96,7 @@
 
 	<sql id="getByCriteriaSql">
 		FROM 
-			USER RES
+			ROLE_USER RES
 		<include refid="Commons.querySql"/>
 	</sql>
 

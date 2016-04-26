@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.raise.ums.dao.UserDao">
+<mapper namespace="com.raise.ums.dao.NodeDao">
 	<cache type="com.raise.core.mybatis.cache.FacadeCache" />
-	<resultMap id="UserResultMap" type="com.raise.ums.entity.UserEntity" extends="Commons.resultMapSql">
+	<resultMap id="NODEResultMap" type="com.raise.ums.entity.NodeEntity" extends="Commons.resultMapSql">
 		<result property="name" column="NAME" jdbcType="VARCHAR"/>
-		<result property="account" column="ACCOUNT" jdbcType="VARCHAR"/>
-		<result property="password" column="PASSWORD" jdbcType="VARCHAR"/>
-		<result property="email" column="EMAIL" jdbcType="VARCHAR"/>
+		<result property="title" column="TITLE" jdbcType="VARCHAR"/>
+		<result property="remark" column="REMARK" jdbcType="VARCHAR"/>
+		<result property="sort" column="SORT" jdbcType="VARCHAR"/>
+		<result property="level" column="LEVEL" jdbcType="NUMERIC"/>
+		<result property="pid" column="PID" jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<sql id="columns">
 			<include refid="Commons.columnsSql"/>,
 			NAME,
-			ACCOUNT,
-			PASSWORD,
-			EMAIL
+			TITLE,
+			REMARK,
+			SORT,
+			LEVEL,
+			PID
 	</sql>
 	
-	<insert id="add" parameterType="com.raise.ums.entity.UserEntity">
-		INSERT INTO user
+	<insert id="add" parameterType="com.raise.ums.entity.NodeEntity">
+		INSERT INTO NODE
 		(
 			<include refid="columns"></include>
 		)
@@ -26,41 +30,45 @@
 		(
 			<include refid="Commons.addValuesSql"/>,
 			#{name,jdbcType=VARCHAR}, 
-			#{account,jdbcType=VARCHAR}, 
-			#{password,jdbcType=VARCHAR},
-			#{email,jdbcType=VARCHAR}
+			#{title,jdbcType=VARCHAR},
+			#{remark,jdbcType=VARCHAR},
+			#{sort,jdbcType=VARCHAR},
+			#{level,jdbcType=NUMERIC},
+			#{pid,jdbcType=VARCHAR}
 			
 		)
 	</insert>
 	
-	<select id="get"   parameterType="String" resultMap="UserResultMap">
+	<select id="get"   parameterType="String" resultMap="NODEResultMap">
 		SELECT 
 			<include refid="columns" /> 
 		FROM 
-			USER 
+			NODE 
 		WHERE 
 			IS_DELETED='0'
 			AND ID=#{id}
 	</select>
 	
 	
-	<update id="update" parameterType="com.raise.ums.entity.UserEntity">
-		UPDATE USER SET
+	<update id="update" parameterType="com.raise.ums.entity.NodeEntity">
+		UPDATE NODE SET
 			<include refid="Commons.updateSetsSql"/>,
 			ACCOUNT=#{account,jdbcType=VARCHAR},
-			PASSWORD=#{password,jdbcType=VARCHAR},
-			NAME_#{name,jdbcType=VARCHAR},
-			EMAIL=#{email,jdbcType=VARCHAR}
+			TITLE=#{title,jdbcType=VARCHAR},
+			REMARK=#{remark,jdbcType=VARCHAR},
+			SORT=#{sort,jdbcType=VARCHAR},
+			LEVEL=#{level,jdbcType=NUMERIC},
+			PID=#{password,jdbcType=VARCHAR}
 		WHERE
 			ID=#{id}
 	</update>
 	
 	<update id="delete"  parameterType="String">
 		<include refid="Commons.params"/>
-		UPDATE USER SET
+		UPDATE NODE SET
 			IS_DELETED='1',
 			UPDATED=#{currentTime,jdbcType=TIMESTAMP},
-			UPDATED_BY=#{currentUserId,jdbcType=VARCHAR}
+			UPDATED_BY=#{currentNODEId,jdbcType=VARCHAR}
 		WHERE
 			ID_=#{id}
 	</update>
@@ -68,35 +76,35 @@
 	<update id="disable"  parameterType="String">
 		<include refid="Commons.params"/>
 		UPDATE 
-			USER 
+			NODE 
 		SET
 			IS_ACTIVE_='0',
 			UPDATED=#{currentTime,jdbcType=TIMESTAMP},
-			UPDATED_BY=#{currentUserId,jdbcType=VARCHAR}
+			UPDATED_BY=#{currentNODEId,jdbcType=VARCHAR}
 		WHERE
 			ID_=#{id}
 	</update>
 	<update id="enable"  parameterType="String">
 		<include refid="Commons.params"/>
 		UPDATE 
-			USER 
+			NODE 
 		SET
 			IS_ACTIVE='1',
 			UPDATED=#{currentTime,jdbcType=TIMESTAMP},
-			UPDATED_BY=#{currentUserId,jdbcType=VARCHAR}
+			UPDATED_BY=#{currentNODEId,jdbcType=VARCHAR}
 		WHERE
 			ID_=#{id}
 	</update>
 	
 	<!-- Operate by criteria -->
 	
-	<select id="getByCriteria" parameterType="com.raise.ums.manager.query.UserQuery" resultMap="UserResultMap">
+	<select id="getByCriteria" parameterType="com.raise.ums.manager.query.NodeQuery" resultMap="NODEResultMap">
 		SELECT 
 			<include refid="columns"></include>
 		<include refid="getByCriteriaSql" />
 	</select>
 	
-	<select id="countByCriteria" parameterType="com.raise.ums.manager.query.UserQuery" resultType="Long">
+	<select id="countByCriteria" parameterType="com.raise.ums.manager.query.NodeQuery" resultType="Long">
 		SELECT 
 			count(1)
 		<include refid="getByCriteriaSql" />
@@ -104,7 +112,7 @@
 
 	<sql id="getByCriteriaSql">
 		FROM 
-			USER RES
+			NODE RES
 		<include refid="Commons.querySql"/>
 	</sql>
 

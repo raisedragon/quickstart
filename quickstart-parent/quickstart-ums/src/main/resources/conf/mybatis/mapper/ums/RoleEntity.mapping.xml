@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.raise.ums.dao.UserDao">
+<mapper namespace="com.raise.ums.dao.RoleDao">
 	<cache type="com.raise.core.mybatis.cache.FacadeCache" />
-	<resultMap id="UserResultMap" type="com.raise.ums.entity.UserEntity" extends="Commons.resultMapSql">
+	<resultMap id="ROLEResultMap" type="com.raise.ums.entity.RoleEntity" extends="Commons.resultMapSql">
 		<result property="name" column="NAME" jdbcType="VARCHAR"/>
-		<result property="account" column="ACCOUNT" jdbcType="VARCHAR"/>
-		<result property="password" column="PASSWORD" jdbcType="VARCHAR"/>
-		<result property="email" column="EMAIL" jdbcType="VARCHAR"/>
+		<result property="pid" column="PID" jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<sql id="columns">
 			<include refid="Commons.columnsSql"/>,
 			NAME,
-			ACCOUNT,
-			PASSWORD,
-			EMAIL
+			PID
 	</sql>
 	
-	<insert id="add" parameterType="com.raise.ums.entity.UserEntity">
-		INSERT INTO user
+	<insert id="add" parameterType="com.raise.ums.entity.RoleEntity">
+		INSERT INTO ROLE
 		(
 			<include refid="columns"></include>
 		)
@@ -26,41 +22,37 @@
 		(
 			<include refid="Commons.addValuesSql"/>,
 			#{name,jdbcType=VARCHAR}, 
-			#{account,jdbcType=VARCHAR}, 
-			#{password,jdbcType=VARCHAR},
-			#{email,jdbcType=VARCHAR}
+			#{pid,jdbcType=VARCHAR}
 			
 		)
 	</insert>
 	
-	<select id="get"   parameterType="String" resultMap="UserResultMap">
+	<select id="get"   parameterType="String" resultMap="ROLEResultMap">
 		SELECT 
 			<include refid="columns" /> 
 		FROM 
-			USER 
+			ROLE 
 		WHERE 
 			IS_DELETED='0'
 			AND ID=#{id}
 	</select>
 	
 	
-	<update id="update" parameterType="com.raise.ums.entity.UserEntity">
-		UPDATE USER SET
+	<update id="update" parameterType="com.raise.ums.entity.RoleEntity">
+		UPDATE ROLE SET
 			<include refid="Commons.updateSetsSql"/>,
 			ACCOUNT=#{account,jdbcType=VARCHAR},
-			PASSWORD=#{password,jdbcType=VARCHAR},
-			NAME_#{name,jdbcType=VARCHAR},
-			EMAIL=#{email,jdbcType=VARCHAR}
+			PID=#{password,jdbcType=VARCHAR}
 		WHERE
 			ID=#{id}
 	</update>
 	
 	<update id="delete"  parameterType="String">
 		<include refid="Commons.params"/>
-		UPDATE USER SET
+		UPDATE ROLE SET
 			IS_DELETED='1',
 			UPDATED=#{currentTime,jdbcType=TIMESTAMP},
-			UPDATED_BY=#{currentUserId,jdbcType=VARCHAR}
+			UPDATED_BY=#{currentROLEId,jdbcType=VARCHAR}
 		WHERE
 			ID_=#{id}
 	</update>
@@ -68,35 +60,35 @@
 	<update id="disable"  parameterType="String">
 		<include refid="Commons.params"/>
 		UPDATE 
-			USER 
+			ROLE 
 		SET
 			IS_ACTIVE_='0',
 			UPDATED=#{currentTime,jdbcType=TIMESTAMP},
-			UPDATED_BY=#{currentUserId,jdbcType=VARCHAR}
+			UPDATED_BY=#{currentROLEId,jdbcType=VARCHAR}
 		WHERE
 			ID_=#{id}
 	</update>
 	<update id="enable"  parameterType="String">
 		<include refid="Commons.params"/>
 		UPDATE 
-			USER 
+			ROLE 
 		SET
 			IS_ACTIVE='1',
 			UPDATED=#{currentTime,jdbcType=TIMESTAMP},
-			UPDATED_BY=#{currentUserId,jdbcType=VARCHAR}
+			UPDATED_BY=#{currentROLEId,jdbcType=VARCHAR}
 		WHERE
 			ID_=#{id}
 	</update>
 	
 	<!-- Operate by criteria -->
 	
-	<select id="getByCriteria" parameterType="com.raise.ums.manager.query.UserQuery" resultMap="UserResultMap">
+	<select id="getByCriteria" parameterType="com.raise.ums.manager.query.RoleQuery" resultMap="ROLEResultMap">
 		SELECT 
 			<include refid="columns"></include>
 		<include refid="getByCriteriaSql" />
 	</select>
 	
-	<select id="countByCriteria" parameterType="com.raise.ums.manager.query.UserQuery" resultType="Long">
+	<select id="countByCriteria" parameterType="com.raise.ums.manager.query.RoleQuery" resultType="Long">
 		SELECT 
 			count(1)
 		<include refid="getByCriteriaSql" />
@@ -104,7 +96,7 @@
 
 	<sql id="getByCriteriaSql">
 		FROM 
-			USER RES
+			ROLE RES
 		<include refid="Commons.querySql"/>
 	</sql>
 

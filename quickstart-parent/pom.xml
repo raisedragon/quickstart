@@ -18,6 +18,7 @@
 		<module>quickstart-web</module>
 		<module>quickstart-spi</module>
 		<module>quickstart-portal</module>
+		<module>quickstart-generator</module>
 	</modules>
 
 

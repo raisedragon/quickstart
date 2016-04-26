@@ -2,6 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Commons">
 	
+	<resultMap type="com.raise.core.entity.BaseEntity" id="resultMapSql">
+		<id property="id" column="ID" jdbcType="VARCHAR"/>
+		<result property="created" column="CREATED" jdbcType="TIMESTAMP"/>
+		<result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR"/>
+		<result property="updated" column="UPDATED" jdbcType="TIMESTAMP"/>
+		<result property="updatedBy" column="UPDATED_BY" jdbcType="VARCHAR"/>
+		<result property="groupId" column="GROUP_ID" jdbcType="VARCHAR"/>
+		<result property="isDeleted" column="IS_DELETED" jdbcType="CHAR"/>
+		<result property="isActive" column="IS_ACTIVE" jdbcType="CHAR"/>
+	</resultMap>
+	<sql id="columnsSql">
+		ID,
+		CREATED,
+		CREATED_BY,
+		UPDATED,
+		UPDATED_BY,
+		GROUP_ID,
+		IS_ACTIVE,
+		IS_DELETED
+	</sql>
+	<sql id="addValuesSql">
+		#{id,jdbcType=VARCHAR}, 
+		#{created,jdbcType=TIMESTAMP}, 
+		#{createdBy,jdbcType=VARCHAR}, 
+		#{updated,jdbcType=TIMESTAMP}, 
+		#{updatedBy,jdbcType=VARCHAR},
+		#{groupId,jdbcType=VARCHAR}, 
+		#{isActive,jdbcType=CHAR}, 
+		#{isDeleted,jdbcType=CHAR}
+	</sql>
+	<sql id="updateSetsSql">
+		ID=#{id,jdbcType=VARCHAR},
+		CREATED=#{created,jdbcType=TIMESTAMP},
+		CREATED_BY=#{createdBy,jdbcType=VARCHAR},
+		UPDATED=#{updated,jdbcType=TIMESTAMP},
+		UPDATED_BY=#{updatedBy,jdbcType=VARCHAR},
+		GROUP_ID=#{groupId,jdbcType=VARCHAR},
+		IS_ACTIVE=#{isActive,jdbcType=CHAR},
+		IS_DELETED=#{isDeleted,jdbcType=CHAR}
+	</sql>
+	
 	<sql id="querySql">
 		<where>
 			IS_DELETED='0'
@@ -41,64 +82,64 @@
 		<foreach collection="criteria.criterions" item="criterion">
 			<choose>
 				<when test="criterion.criteriaOperator.name()=='Equal'">
-					and RES.${criterion.propertyName} = #{criterion.value}
+					AND RES.${criterion.propertyName} = #{criterion.value}
 				</when>
 				<when test="criterion.criteriaOperator.name()=='LessThanOrEqual'">
-					and RES.${criterion.propertyName} &lt;= #{criterion.value}
+					AND RES.${criterion.propertyName} &lt;= #{criterion.value}
 				</when>
 				<when test="criterion.criteriaOperator.name()=='GreaterThanOrEqual'">
-					and RES.${criterion.propertyName} >= #{criterion.value}
+					AND RES.${criterion.propertyName} >= #{criterion.value}
 				</when>
 				<when test="criterion.criteriaOperator.name()=='NotEqual'">
-					and RES.${criterion.propertyName} != #{criterion.value}
+					AND RES.${criterion.propertyName} != #{criterion.value}
 				</when>
 				<when test="criterion.criteriaOperator.name()=='IsNull'">
-					and RES.${criterion.propertyName} is null
+					AND RES.${criterion.propertyName} IS NULL
 				</when>
 				<when test="criterion.criteriaOperator.name()=='IsNotNull'">
-					and RES.${criterion.propertyName} is not null
+					AND RES.${criterion.propertyName} IS NOT NULL
 				</when>
 				<when test="criterion.criteriaOperator.name()=='Like'">
 					<bind name="pattern" value="'%' + criterion.value + '%'" />
-					and RES.${criterion.propertyName} like #{pattern}
+					AND RES.${criterion.propertyName} LIKE #{pattern}
 				</when>
 				<when test="criterion.criteriaOperator.name()=='FirstLike'">
 					<bind name="pattern" value="'%' + criterion.value" />
-					and RES.${criterion.propertyName} like #{pattern}
+					AND RES.${criterion.propertyName} LIKE #{pattern}
 				</when>
 				<when test="criterion.criteriaOperator.name()=='LastLike'">
 					<bind name="pattern" value="criterion.value + '%'" />
-					and RES.${criterion.propertyName} like #{pattern}
+					AND RES.${criterion.propertyName} LIKE #{pattern}
 				</when>
 				<when test="criterion.criteriaOperator.name()=='NotLike'">
 					<bind name="pattern" value="'%' + criterion.value + '%'" />
-					and RES.${criterion.propertyName} not like #{pattern}
+					AND RES.${criterion.propertyName} NOT LIKE #{pattern}
 				</when>
 				<when test="criterion.criteriaOperator.name()=='NotFirstLike'">
 					<bind name="pattern" value="'%' + criterion.value" />
-					and RES.${criterion.propertyName} not like #{pattern}
+					AND RES.${criterion.propertyName} NOT LIKE #{pattern}
 				</when>
 				<when test="criterion.criteriaOperator.name()=='NotLastLike'">
 					<bind name="pattern" value="criterion.value + '%'" />
-					and RES.${criterion.propertyName} not like #{pattern}
+					AND RES.${criterion.propertyName} NOT LIKE #{pattern}
 				</when>
 				<when test="criterion.criteriaOperator.name()=='In'">
-					and RES.${criterion.propertyName} IN 
+					AND RES.${criterion.propertyName} IN 
 					<foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
 						#{listItem}
 					</foreach>
 				</when>
 				<when test="criterion.criteriaOperator.name()=='NotIn'">
-					and RES.${criterion.propertyName} NOT IN 
+					AND RES.${criterion.propertyName} NOT IN 
 					<foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
 						#{listItem}
 					</foreach>
 				</when>
 				<when test="criterion.criteriaOperator.name()=='Between'">
-					and RES.${criterion.propertyName} NOT BETWEEN  #{criterion.value[0]} AND #{criterion.value[1]} 
+					AND RES.${criterion.propertyName} NOT BETWEEN  #{criterion.value[0]} AND #{criterion.value[1]} 
 				</when>
 				<when test="criterion.criteriaOperator.name()=='NotBetween'">
-					and RES.${criterion.propertyName} BETWEEN  #{criterion.value[0]} AND #{criterion.value[1]} 
+					AND RES.${criterion.propertyName} BETWEEN  #{criterion.value[0]} AND #{criterion.value[1]} 
 				</when>
 			</choose>
 		</foreach>
@@ -112,6 +153,10 @@
 		</set>
 	</sql>
 	
+	<sql id="params">
+		<bind name="currentTime" value="@com.raise.core.ctx.Context@currentDate()"/>
+		<bind name="currentUserId" value="@com.raise.core.ctx.Context@currentUserId()"/>
+	</sql>
 	
 	<sql id="orderByClauseSql">
 		ORDER BY 
