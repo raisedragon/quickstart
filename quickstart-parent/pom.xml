@@ -15,11 +15,11 @@
 	<modules>
 		<module>quickstart-core</module>
 		<module>quickstart-ums</module>
-		<module>quickstart-web</module>
+<!-- 		<module>quickstart-web</module> -->
 		<module>quickstart-spi</module>
-		<module>quickstart-portal</module>
+<!-- 		<module>quickstart-portal</module> -->
 		<module>quickstart-generator</module>
-		<module>quickstart-ums-web</module>
+<!-- 		<module>quickstart-ums-web</module> -->
 	</modules>
 
 
