@@ -23,7 +23,7 @@ import com.raise.ums.query.UserQuery;
 
 
 
-//@Controller
+@Controller
 @RequestMapping("/user")
 public class UserController {
 	@Autowired

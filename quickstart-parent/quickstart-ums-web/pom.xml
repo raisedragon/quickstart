@@ -11,7 +11,7 @@
   <dependencies>
   	<dependency>
   		<groupId>com.raise</groupId>
-  		<artifactId>quickstart-ums</artifactId>
+  		<artifactId>quickstart-spi</artifactId>
   	</dependency>
   	
   	<!-- Spring -->
