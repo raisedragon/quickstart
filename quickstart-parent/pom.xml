@@ -19,6 +19,7 @@
 		<module>quickstart-spi</module>
 		<module>quickstart-portal</module>
 		<module>quickstart-generator</module>
+		<module>quickstart-ums-web</module>
 	</modules>
 
 
@@ -27,6 +28,10 @@
 		<mybatis.version>3.2.5</mybatis.version>
 		<mybatis-spring.version>1.2.2</mybatis-spring.version>
 		<assertj-core-version>3.1.0</assertj-core-version>
+		<tomcat7.verion>2.2</tomcat7.verion>
+		<jetty.version>9.2.16.v20160414</jetty.version>
+		<dubbo.version>2.5.3</dubbo.version>
+		<lifecycle-mapping.version>1.0.0</lifecycle-mapping.version>
 	</properties>
 
 	<dependencyManagement>
@@ -73,7 +78,7 @@
 			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>dubbo</artifactId>
-				<version>2.5.3</version>
+				<version>${dubbo.version}</version>
 			</dependency>
 			<dependency>
 			    <groupId>com.101tec</groupId>
@@ -97,7 +102,7 @@
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
+					<version>${lifecycle-mapping.version}</version>
 					<configuration>
 						<lifecycleMappingMetadata>
 							<pluginExecutions>
@@ -134,9 +139,26 @@
 				<plugin>
 					<groupId>org.apache.tomcat.maven</groupId>
 					<artifactId>tomcat7-maven-plugin</artifactId>
-					<version>2.2</version>
+					<version>${tomcat7.verion}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-maven-plugin</artifactId>
+					<version>${jetty.version}</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
+	<dependencies>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
 </project>

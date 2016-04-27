@@ -15,12 +15,12 @@ import com.raise.ums.manager.UserManager;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 	@Autowired
-	private UserManager userManager;
+	private UserManager manager;
 
 	@Override
 	public List<UserEntity> queryUser(QueryUserCommand cmd) throws SPIException {
 		try {
-			return userManager.list(cmd.getUserQuery());
+			return manager.list(cmd.getUserQuery());
 		} catch (SPIException e) {
 			throw e;
 		} catch (Exception e) {
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserEntity findByEmail(StringCommand cmd) throws SPIException {
 		try {
-			return userManager.findByEmail(cmd.getKey());
+			return manager.findByEmail(cmd.getKey());
 		} catch (SPIException e) {
 			throw e;
 		} catch (Exception e) {
@@ -44,9 +44,9 @@ public class UserServiceImpl implements UserService {
 		try {
 			UserEntity userEntity = cmd.getUser();
 			if (userEntity.getId() == null) {
-				userManager.add(userEntity);
+				manager.add(userEntity);
 			} else {
-				userManager.update(userEntity);
+				manager.update(userEntity);
 			}
 		} catch (SPIException e) {
 			throw e;
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserEntity findByName(StringCommand cmd) throws SPIException {
 		try {
-			return userManager.findByName(cmd.getKey());
+			return manager.findByName(cmd.getKey());
 		} catch (SPIException e) {
 			throw e;
 		} catch (Exception e) {
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserEntity findByAccount(StringCommand cmd) throws SPIException {
 		try {
-			return userManager.findByAccount(cmd.getKey());
+			return manager.findByAccount(cmd.getKey());
 		} catch (SPIException e) {
 			throw e;
 		} catch (Exception e) {
